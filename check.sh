@@ -76,9 +76,11 @@ exit_code=0
 # All files improperly formatted will be printed to the output.
 src_files=$(find "$CHECK_PATH" -name .git -prune -o -regextype posix-egrep -regex "$INCLUDE_REGEX" -print)
 
+
 # Be verbose:
-echo "Checking files:"
-echo ${src_files}
+src_files_list=$(echo $src_files | tr ' ' '\n')
+echo "Checking the following list of files:"
+echo ${src_files_list}
 
 # check formatting in each source file
 for file in $src_files; do
