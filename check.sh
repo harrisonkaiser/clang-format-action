@@ -77,13 +77,14 @@ exit_code=0
 src_files=$(find "$CHECK_PATH" -name .git -prune -o -regextype posix-egrep -regex "$INCLUDE_REGEX" -print)
 
 # check formatting in each source file
+echo "Checking files..."
 for file in $src_files; do
+        echo ${file}
 	# Only check formatting if the path doesn't match the regex
 	if ! [[ ${file} =~ $EXCLUDE_REGEX ]]; then
 		format_diff "${file}"
 	fi
 done
-
 # global exit code is flipped to nonzero if any invocation of `format_diff` has
 # a formatting difference.
 exit "$exit_code"
